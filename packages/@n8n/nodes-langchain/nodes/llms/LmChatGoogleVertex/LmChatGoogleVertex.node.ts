@@ -18,7 +18,6 @@ import { getConnectionHintNoticeField } from '@utils/sharedFields';
 import { makeErrorFromStatus } from './error-handling';
 import { additionalOptions } from '../gemini-common/additional-options';
 import { makeN8nLlmFailedAttemptHandler } from '../n8nLlmFailedAttemptHandler';
-import { N8nLlmTracing } from '../N8nLlmTracing';
 
 export class LmChatGoogleVertex implements INodeType {
 	description: INodeTypeDescription = {
@@ -172,7 +171,7 @@ export class LmChatGoogleVertex implements INodeType {
 				temperature: options.temperature,
 				maxOutputTokens: options.maxOutputTokens,
 				safetySettings,
-				callbacks: [new N8nLlmTracing(this)],
+				callbacks: [],
 				// Handle ChatVertexAI invocation errors to provide better error messages
 				onFailedAttempt: makeN8nLlmFailedAttemptHandler(this, (error: any) => {
 					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

@@ -11,7 +11,6 @@ import { getConnectionHintNoticeField } from '@utils/sharedFields';
 
 import { ollamaDescription, ollamaModel, ollamaOptions } from './description';
 import { makeN8nLlmFailedAttemptHandler } from '../n8nLlmFailedAttemptHandler';
-import { N8nLlmTracing } from '../N8nLlmTracing';
 
 export class LmOllama implements INodeType {
 	description: INodeTypeDescription = {
@@ -67,7 +66,7 @@ export class LmOllama implements INodeType {
 			baseUrl: credentials.baseUrl as string,
 			model: modelName,
 			...options,
-			callbacks: [new N8nLlmTracing(this)],
+			callbacks: [],
 			onFailedAttempt: makeN8nLlmFailedAttemptHandler(this),
 			headers,
 		});

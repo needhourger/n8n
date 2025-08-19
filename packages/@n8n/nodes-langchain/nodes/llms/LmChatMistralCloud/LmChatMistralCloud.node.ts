@@ -11,7 +11,6 @@ import {
 import { getConnectionHintNoticeField } from '@utils/sharedFields';
 
 import { makeN8nLlmFailedAttemptHandler } from '../n8nLlmFailedAttemptHandler';
-import { N8nLlmTracing } from '../N8nLlmTracing';
 
 export class LmChatMistralCloud implements INodeType {
 	description: INodeTypeDescription = {
@@ -190,7 +189,7 @@ export class LmChatMistralCloud implements INodeType {
 			apiKey: credentials.apiKey as string,
 			model: modelName,
 			...options,
-			callbacks: [new N8nLlmTracing(this)],
+			callbacks: [],
 			onFailedAttempt: makeN8nLlmFailedAttemptHandler(this),
 		});
 
