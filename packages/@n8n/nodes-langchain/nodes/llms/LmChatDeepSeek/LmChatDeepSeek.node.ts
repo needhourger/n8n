@@ -13,7 +13,6 @@ import { getConnectionHintNoticeField } from '@utils/sharedFields';
 import type { OpenAICompatibleCredential } from '../../../types/types';
 import { openAiFailedAttemptHandler } from '../../vendors/OpenAi/helpers/error-handling';
 import { makeN8nLlmFailedAttemptHandler } from '../n8nLlmFailedAttemptHandler';
-import { N8nLlmTracing } from '../N8nLlmTracing';
 
 export class LmChatDeepSeek implements INodeType {
 	description: INodeTypeDescription = {
@@ -240,7 +239,7 @@ export class LmChatDeepSeek implements INodeType {
 			timeout: options.timeout ?? 60000,
 			maxRetries: options.maxRetries ?? 2,
 			configuration,
-			callbacks: [new N8nLlmTracing(this)],
+			callbacks: [],
 			modelKwargs: options.responseFormat
 				? {
 						response_format: { type: options.responseFormat },

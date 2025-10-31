@@ -13,7 +13,6 @@ import { getConnectionHintNoticeField } from '@utils/sharedFields';
 
 import { lemonadeDescription, lemonadeModel, lemonadeOptions } from './description';
 import { makeN8nLlmFailedAttemptHandler } from '../n8nLlmFailedAttemptHandler';
-import { N8nLlmTracing } from '../N8nLlmTracing';
 
 export class LmLemonade implements INodeType {
 	description: INodeTypeDescription = {
@@ -102,7 +101,7 @@ export class LmLemonade implements INodeType {
 			maxTokens: options.maxTokens && options.maxTokens > 0 ? options.maxTokens : undefined,
 			stop,
 			configuration,
-			callbacks: [new N8nLlmTracing(this)],
+			callbacks: [],
 			onFailedAttempt: makeN8nLlmFailedAttemptHandler(this),
 		});
 

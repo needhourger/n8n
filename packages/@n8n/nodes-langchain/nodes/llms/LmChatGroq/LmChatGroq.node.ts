@@ -11,7 +11,6 @@ import { getProxyAgent } from '@utils/httpProxyAgent';
 import { getConnectionHintNoticeField } from '@utils/sharedFields';
 
 import { makeN8nLlmFailedAttemptHandler } from '../n8nLlmFailedAttemptHandler';
-import { N8nLlmTracing } from '../N8nLlmTracing';
 
 export class LmChatGroq implements INodeType {
 	description: INodeTypeDescription = {
@@ -145,7 +144,7 @@ export class LmChatGroq implements INodeType {
 			model: modelName,
 			maxTokens: options.maxTokensToSample,
 			temperature: options.temperature,
-			callbacks: [new N8nLlmTracing(this)],
+			callbacks: [],
 			httpAgent: getProxyAgent('https://api.groq.com/openai/v1'),
 			onFailedAttempt: makeN8nLlmFailedAttemptHandler(this),
 		});

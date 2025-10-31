@@ -13,7 +13,6 @@ import { getConnectionHintNoticeField } from '@utils/sharedFields';
 import type { OpenAICompatibleCredential } from '../../../types/types';
 import { openAiFailedAttemptHandler } from '../../vendors/OpenAi/helpers/error-handling';
 import { makeN8nLlmFailedAttemptHandler } from '../n8nLlmFailedAttemptHandler';
-import { N8nLlmTracing } from '../N8nLlmTracing';
 
 export class LmChatXAiGrok implements INodeType {
 	description: INodeTypeDescription = {
@@ -240,7 +239,7 @@ export class LmChatXAiGrok implements INodeType {
 			timeout: options.timeout ?? 60000,
 			maxRetries: options.maxRetries ?? 2,
 			configuration,
-			callbacks: [new N8nLlmTracing(this)],
+			callbacks: [],
 			modelKwargs: {
 				stream_options: undefined,
 				...(options.responseFormat

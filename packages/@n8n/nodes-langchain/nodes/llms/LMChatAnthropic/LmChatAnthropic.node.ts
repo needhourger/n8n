@@ -13,7 +13,6 @@ import {
 } from 'n8n-workflow';
 
 import { makeN8nLlmFailedAttemptHandler } from '../n8nLlmFailedAttemptHandler';
-import { N8nLlmTracing } from '../N8nLlmTracing';
 import { searchModels } from './methods/searchModels';
 
 const modelField: INodeProperties = {
@@ -351,7 +350,7 @@ export class LmChatAnthropic implements INodeType {
 			temperature: options.temperature,
 			topK: options.topK,
 			topP: options.topP,
-			callbacks: [new N8nLlmTracing(this, { tokensUsageParser })],
+			callbacks: [],
 			onFailedAttempt: makeN8nLlmFailedAttemptHandler(this),
 			invocationKwargs,
 			clientOptions,

@@ -20,7 +20,6 @@ import type {
 	AzureOpenAIOptions,
 } from './types';
 import { makeN8nLlmFailedAttemptHandler } from '../n8nLlmFailedAttemptHandler';
-import { N8nLlmTracing } from '../N8nLlmTracing';
 
 export class LmChatAzureOpenAi implements INodeType {
 	description: INodeTypeDescription = {
@@ -113,7 +112,7 @@ export class LmChatAzureOpenAi implements INodeType {
 				...options,
 				timeout: options.timeout ?? 60000,
 				maxRetries: options.maxRetries ?? 2,
-				callbacks: [new N8nLlmTracing(this)],
+				callbacks: [],
 				configuration: {
 					fetchOptions: {
 						dispatcher: getProxyAgent(),

@@ -10,7 +10,6 @@ import type {
 import { getConnectionHintNoticeField } from '@utils/sharedFields';
 
 import { makeN8nLlmFailedAttemptHandler } from '../n8nLlmFailedAttemptHandler';
-import { N8nLlmTracing } from '../N8nLlmTracing';
 
 export function tokensUsageParser(result: LLMResult): {
 	completionTokens: number;
@@ -166,7 +165,7 @@ export class LmChatCohere implements INodeType {
 			model: modelName,
 			temperature: options.temperature,
 			maxRetries: options.maxRetries ?? 2,
-			callbacks: [new N8nLlmTracing(this, { tokensUsageParser })],
+			callbacks: [],
 			onFailedAttempt: makeN8nLlmFailedAttemptHandler(this),
 		});
 
